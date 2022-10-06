@@ -1,0 +1,41 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix plants: <http://digitialideation.hslu.ch/dipro/plants#>.
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+
+
+plants:Plant rdf:type owl:Class ;
+                rdfs:comment "A plant is..." ;
+                rdfs:label "Plant".
+        
+plants:plantDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Date when it was planted" ;
+                 rdfs:label "plantDate" .
+
+plants:id rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "identifier in System X" ;
+                 rdfs:label "id" .
+
+plants:species rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "species" ;
+                 rdfs:label "species" .
+
+plants:hasSensorEquipment rdf:type owl:ObjectProperty ;
+                   rdfs:domain plants:Plant ;
+                   rdfs:range brick:Equipment ;
+                   rdfs:comment "..."@en ;
+                   rdfs:label "hasSensorEquipment"@en .
+
+plants:isSensorEquipmentOf rdf:type owl:ObjectProperty;
+                owl:inverseOf plants:hasSensorEquipment .
+
+plants:SoilMoistureSensor rdf:type owl:Class ;
+    rdfs:subClassOf brick:Sensor.

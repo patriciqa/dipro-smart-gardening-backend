@@ -1,0 +1,151 @@
+@prefix sstoffi: <https://brickbuilding.hslu.ch/buildings/suurstoffi1b#> .
+
+@prefix brick: <https://brickschema.org/schema/Brick#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix plants: <http://digitialideation.hslu.ch/dipro/plants#>.
+
+
+# Building
+################################
+
+sstoffi:building1b a brick:Building;
+    rdfs:label "Suurstoffi 1b";
+    brick:hasPart sstoffi:floor0;
+    brick:hasPart sstoffi:floor1;
+    brick:hasPart sstoffi:floor2;
+    brick:hasPart sstoffi:floor3;
+    brick:hasPart sstoffi:floor4;
+    brick:hasPart sstoffi:floor5.
+
+
+# Floors
+##################################
+sstoffi:floor0 a brick:Floor;
+    rdfs:label "Ground Floor".
+
+sstoffi:floor1 a brick:Floor;
+    rdfs:label "First Floor".
+
+sstoffi:floor2 a brick:Floor;
+    rdfs:label "Second Floor".
+
+sstoffi:floor3 a brick:Floor;
+    rdfs:label "Third Floor".
+
+sstoffi:floor4 a brick:Floor;
+    rdfs:label "Fourth Floor".
+
+sstoffi:floor5 a brick:Floor;
+    rdfs:label "Fifth Floor".
+
+
+
+# Rooms
+#################################
+
+sstoffi:room_001 a brick:Room;
+    brick:isPartOf sstoffi:floor0;
+    rdfs:label "Mensa".
+
+sstoffi:room_101 a brick:Room;
+    brick:isPartOf sstoffi:floor1;
+    rdfs:label "Mensa".
+
+sstoffi:room_201 a brick:Room;
+    brick:isPartOf sstoffi:floor2;
+    rdfs:label "Essenssaal".
+
+sstoffi:room_301 a brick:Room;
+    brick:isPartOf sstoffi:floor3;
+    rdfs:label "Bibliothek".
+
+sstoffi:openOffice_401 a brick:Open_Office;
+    brick:isPartOf sstoffi:floor4;
+    rdfs:label "DI-Space".
+
+sstoffi:room_402 a brick:Room;
+    brick:isPartOf sstoffi:floor4;
+    rdfs:label "DI-Open".
+
+sstoffi:room_501 a brick:Room;
+    brick:isPartOf sstoffi:floor5;
+    rdfs:label "Work Space".
+
+
+# Room Equipment
+#################################
+sstoffi:airEquipment01 a brick:Equipment;
+    brick:hasPoint sstoffi:airTemp01;
+    brick:hasPoint sstoffi:airHumidity01;
+    brick:hasLocation sstoffi:openOffice_401.
+
+sstoffi:airTemp01 a brick:Zone_Air_Temperature_Sensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId01". #TODO
+
+sstoffi:airHumidity01 a brick:Zone_Air_Humidity_Sensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId02". #TODO
+
+sstoffi:airQualityEquipment01 a brick:Equipment;
+    brick:hasPoint sstoffi:airQuality01;
+    brick:hasLocation sstoffi:openOffice_401.
+
+sstoffi:airQuality01 a brick:CO2_Sensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId03". #TODO
+
+sstoffi:luminanceEquipment01 a brick:Equipment;
+    brick:hasPoint sstoffi:luminance01;
+    brick:hasLocation sstoffi:openOffice_401.
+
+sstoffi:luminance01 a brick:Luminance_Sensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId04". #TODO
+
+
+# Plants
+#################################
+sstoffi:plant401_01 a plants:Plant;
+    plants:id "plant401_01";
+    plants:plantDate "2022-09-30";
+    plants:species "Boston Farn";
+    brick:hasLocation sstoffi:openOffice_401;
+    plants:hasSensorEquipment sstoffi:soilMoistureEquipment01.
+
+sstoffi:soilMoistureEquipment01 a brick:Equipment;
+    brick:hasPoint sstoffi:soilMoisture01;
+    brick:hasLocation sstoffi:openOffice_401.
+
+sstoffi:soilMoisture01 a plants:SoilMoistureSensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId05"; #TODO
+    brick:measures sstoffi:plant401_01.
+
+sstoffi:plant401_02 a plants:Plant;
+    plants:id "plant401_02";
+    plants:plantDate "2022-09-30";
+    plants:species "Mexikanische Bergpalme";
+    brick:hasLocation sstoffi:openOffice_401;
+    plants:hasSensorEquipment sstoffi:soilMoistureEquipment02.
+
+sstoffi:soilMoistureEquipment02 a brick:Equipment;
+    brick:hasPoint sstoffi:soilMoisture02;
+    brick:hasLocation sstoffi:openOffice_401.
+
+sstoffi:soilMoisture02 a plants:SoilMoistureSensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId06"; #TODO
+    brick:measures sstoffi:plant401_02.
+
+sstoffi:plant401_03 a plants:Plant;
+    plants:id "plant401_03";
+    plants:plantDate "2022-09-30";
+    plants:species "Dieffenbachia gemischt";
+    brick:hasLocation sstoffi:openOffice_401;
+    plants:hasSensorEquipment sstoffi:soilMoistureEquipment03.
+
+sstoffi:soilMoistureEquipment03 a brick:Equipment;
+    brick:hasPoint sstoffi:soilMoisture03;
+    brick:hasLocation sstoffi:openOffice_401.
+
+sstoffi:soilMoisture03 a plants:SoilMoistureSensor;
+    brick:storedAt "http://restapi/of/timeseries/pointId07"; #TODO
+    brick:measures sstoffi:plant401_03.
