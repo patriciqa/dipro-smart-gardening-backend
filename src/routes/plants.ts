@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { getPlants, getFloors } from "../controllers/sparql";
 const router = express.Router();
 
+
+
 router.get("/floors", async (req: Request, res: Response) => {
   try {
     const entries = await getFloors();

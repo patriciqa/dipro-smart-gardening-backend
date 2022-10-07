@@ -3,6 +3,7 @@
     "dev": "tsc && node src/server.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "graphdb": "^2.0.2"
   },
   "devDependencies": {

@@ -4,6 +4,14 @@ const app = express();
 const port = 3000; // default port to listen
 import plantsRouter from "./routes/plants";
 
+const cors = require('cors');
+
+let corsOptions = {
+  origin: ['http://localhost:3001']
+}
+
+app.use(cors(corsOptions));
+
 app.use(plantsRouter);
 // start the express server
 

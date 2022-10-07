@@ -9,7 +9,7 @@ const { GetQueryPayload } = require("graphdb").query;
 import { plantQuery, floorQuery, floorsQuery } from "./queries";
 
 const config = new RepositoryClientConfig("http://localhost:7200/")
-  .setEndpoints(["http://localhost:7200/repositories/Surstoffi"])
+  .setEndpoints(["http://localhost:7200/repositories/dipro-suurstoffi"])
   .setHeaders({
     Accept: RDFMimeType.SPARQL_RESULTS_JSON,
   })
