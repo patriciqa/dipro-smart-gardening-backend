@@ -110,7 +110,13 @@ sstoffi:plant401_01 a plants:Plant;
     plants:plantDate "2022-09-30";
     plants:species "Boston Farn";
     brick:hasLocation sstoffi:openOffice_401;
-    plants:hasSensorEquipment sstoffi:soilMoistureEquipment01.
+    plants:hasSensorEquipment sstoffi:soilMoistureEquipment01;
+    plants:potSize "15cm";
+    plants:lightNeed "Halbschatten";
+    plants:substrate "Erde";
+    plants:waterNeed 3;
+    plants:lastService "2022-09-30";
+    plants:nextService "2023-03-30".
 
 sstoffi:soilMoistureEquipment01 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture01;
@@ -125,7 +131,13 @@ sstoffi:plant401_02 a plants:Plant;
     plants:plantDate "2022-09-30";
     plants:species "Mexikanische Bergpalme";
     brick:hasLocation sstoffi:openOffice_401;
-    plants:hasSensorEquipment sstoffi:soilMoistureEquipment02.
+    plants:hasSensorEquipment sstoffi:soilMoistureEquipment02;
+    plants:potSize "10cm";
+    plants:lightNeed "Hell";
+    plants:substrate "Erde";
+    plants:waterNeed 2;
+    plants:lastService "2022-09-30";
+    plants:nextService "2023-06-30".
 
 sstoffi:soilMoistureEquipment02 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture02;
@@ -140,7 +152,13 @@ sstoffi:plant401_03 a plants:Plant;
     plants:plantDate "2022-09-30";
     plants:species "Dieffenbachia gemischt";
     brick:hasLocation sstoffi:openOffice_401;
-    plants:hasSensorEquipment sstoffi:soilMoistureEquipment03.
+    plants:hasSensorEquipment sstoffi:soilMoistureEquipment03;
+    plants:potSize "13cm";
+    plants:lightNeed "Halbschatten";
+    plants:substrate "Erde";
+    plants:waterNeed 2;
+    plants:lastService "2022-09-30";
+    plants:nextService "2023-09-30".
 
 sstoffi:soilMoistureEquipment03 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture03;

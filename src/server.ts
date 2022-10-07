@@ -1,7 +1,7 @@
 import express from "express";
 
 const app = express();
-const port = 8080; // default port to listen
+const port = 3000; // default port to listen
 import plantsRouter from "./routes/plants";
 
 app.use(plantsRouter);

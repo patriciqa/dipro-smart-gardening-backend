@@ -39,3 +39,40 @@ plants:isSensorEquipmentOf rdf:type owl:ObjectProperty;
 
 plants:SoilMoistureSensor rdf:type owl:Class ;
     rdfs:subClassOf brick:Sensor.
+
+plants:potSize rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "potSize" ;
+                 rdfs:label "potSize" .
+
+plants:lightNeed rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "lightNeed" ;
+                 rdfs:label "lightNeed" .
+                 
+plants:substrate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "substrate" ;
+                 rdfs:label "substrate" .
+
+plants:waterNeed rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:integer ;
+                 rdfs:comment "waterNeed" ;
+                 rdfs:label "waterNeed" .
+                 
+plants:lastService rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Date of last service" ;
+                 rdfs:label "lastService" .
+                 
+plants:nextService rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Date of next service" ;
+                 rdfs:label "nextService" .
+                 

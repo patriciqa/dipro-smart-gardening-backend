@@ -1,0 +1,36 @@
+// GET/ floors
+[
+    {
+        "floorId": "url",
+        "floorLabel": "label"
+    }
+]
+//GET/ /floor/{floorLabel}
+{
+    "floorLabel": "label",
+    "rooms": [
+        {
+            "roomId": "url",
+            "roomLabel": "roomLabel",
+            "plantCount": 5 ,
+        }
+    ]
+}
+//GET/ /rooms/{roomid}
+{
+    "roomTemperature": 22,
+    "humidity": 60,
+    "co2": 600,
+    "plants": [
+        {
+            "species": "label",
+            "potSize": "small",
+            "substrat": "erde",
+            "waterNeed": 1,
+            "lightNeed": "sonnig",
+            "plantDate": "yyyy-mm-dd",
+            "lastService": "yyyy-mm-dd",
+            "nextService": "yyyy-mm-dd",
+        }
+    ]
+}

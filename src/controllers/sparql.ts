@@ -6,7 +6,7 @@ const { RepositoryClientConfig, RDFRepositoryClient } =
   require("graphdb").repository;
 // @ts-ignore
 const { GetQueryPayload } = require("graphdb").query;
-import { Request, Response } from "express";
+import { plantQuery, floorQuery, floorsQuery } from "./queries";
 
 const config = new RepositoryClientConfig("http://localhost:7200/")
   .setEndpoints(["http://localhost:7200/repositories/Surstoffi"])
@@ -26,32 +26,49 @@ select * where {
 } 
 `;
 
-// getting all floors
-const getFloors = async (req: Request, res: Response) => {
+export async function getPlants() {
   const payload = (
-    new GetQueryPayload().setQuery(query) as unknown as GetQueryPayload
+    new GetQueryPayload().setQuery(plantQuery) as unknown as GetQueryPayload
+  )
+    .setQueryType(QueryType.SELECT)
+    // .addBinding("$floorFilter", '"Flr00"')
+    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
+
+  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
+  const stream = await q;
+  const result = await readString(stream);
+  const entries = simplifyJson(result);
+  return entries;
+}
+
+export async function getFloors() {
+  const payload = (
+    new GetQueryPayload().setQuery(floorsQuery) as unknown as GetQueryPayload
+  )
+    .setQueryType(QueryType.SELECT)
+    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
+
+  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
+  const stream = await q;
+  const result = await readString(stream);
+  const entries = simplifyJson(result);
+  return entries;
+}
+
+export async function getFloor() {
+  const payload = (
+    new GetQueryPayload().setQuery(floorQuery) as unknown as GetQueryPayload
   )
     .setQueryType(QueryType.SELECT)
     .addBinding("$floorFilter", '"Flr00"')
-    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON)
-    .setLimit(20);
+    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
 
-  (async () => {
-    const q: Promise<NodeJS.ReadStream> = repository.query(payload);
-    try {
-      const stream = await q;
-      const result = await readString(stream);
-      const entries = simplifyJson(result);
-      res.status(200).json(entries);
-      res.end();
-      console.log(entries);
-    } catch (err) {
-      console.error("Could not load data from graphDB", err);
-      res.status(500).write("");
-      res.end();
-    }
-  })();
-};
+  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
+  const stream = await q;
+  const result = await readString(stream);
+  const entries = simplifyJson(result);
+  return entries;
+}
 
 function readString(stream: NodeJS.ReadStream) {
   const chunks: Buffer[] = [];
@@ -76,5 +93,3 @@ function simplifyJson(json: string) {
   }
   return [];
 }
-
-export default { getFloors };
