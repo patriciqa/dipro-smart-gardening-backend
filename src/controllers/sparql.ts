@@ -26,21 +26,6 @@ select * where {
 } 
 `;
 
-export async function getPlants() {
-  const payload = (
-    new GetQueryPayload().setQuery(plantQuery) as unknown as GetQueryPayload
-  )
-    .setQueryType(QueryType.SELECT)
-    // .addBinding("$floorFilter", '"Flr00"')
-    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
-
-  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
-  const stream = await q;
-  const result = await readString(stream);
-  const entries = simplifyJson(result);
-  return entries;
-}
-
 export async function getFloors() {
   const payload = (
     new GetQueryPayload().setQuery(floorsQuery) as unknown as GetQueryPayload
@@ -55,19 +40,59 @@ export async function getFloors() {
   return entries;
 }
 
-export async function getFloor() {
+export async function getFloor(floorId: string) {
   const payload = (
     new GetQueryPayload().setQuery(floorQuery) as unknown as GetQueryPayload
   )
     .setQueryType(QueryType.SELECT)
-    .addBinding("$floorFilter", '"Flr00"')
+    .addBinding(
+      "$floor",
+      `<https://brickbuilding.hslu.ch/buildings/suurstoffi1b#${floorId}>`
+    )
     .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
 
   const q: Promise<NodeJS.ReadStream> = repository.query(payload);
   const stream = await q;
   const result = await readString(stream);
   const entries = simplifyJson(result);
-  return entries;
+  if (entries.length > 0) {
+    const floorLabel = entries[0].floorLabel;
+    entries.forEach((e) => delete e.floorLabel);
+    const floor = { floorLabel, rooms: entries };
+    return floor;
+  }
+  return null;
+}
+
+export async function getRoom(roomId: string) {
+  const payload = (
+    new GetQueryPayload().setQuery(plantQuery) as unknown as GetQueryPayload
+  )
+    .setQueryType(QueryType.SELECT)
+    .addBinding(
+      "$room",
+      `<https://brickbuilding.hslu.ch/buildings/suurstoffi1b#${roomId}>`
+    )
+    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
+
+  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
+  const stream = await q;
+  const result = await readString(stream);
+  const entries = simplifyJson(result);
+  if (entries.length > 0) {
+    let plants = [];
+    const roomLabel = entries[0].roomLabel;
+    entries.forEach((e) => {
+      delete e.room;
+      delete e.roomLabel;
+    });
+    if ("plant" in entries[0]) {
+      plants = entries;
+    }
+    const room = { roomLabel, plants };
+    return room;
+  }
+  return null;
 }
 
 function readString(stream: NodeJS.ReadStream) {
