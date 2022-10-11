@@ -75,4 +75,9 @@ plants:nextService rdf:type owl:DatatypeProperty ;
                  rdfs:range xsd:dateTime ;
                  rdfs:comment "Date of next service" ;
                  rdfs:label "nextService" .
-                 
+               
+plants:plantImage rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "Url of plant image" ;
+                 rdfs:label "plantImage" .

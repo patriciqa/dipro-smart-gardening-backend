@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { getRoom, getFloors, getFloor } from "../controllers/sparql";
+import path from "path";
 const router = express.Router();
 
 
@@ -36,5 +37,8 @@ router.get("/rooms/:roomId", async (req: Request, res: Response) => {
     res.status(500).send();
   }
 });
+
+const plantImages = path.join(__dirname, "..", "images");
+router.use("/plantImages", express.static(plantImages));
 
 export default router;
