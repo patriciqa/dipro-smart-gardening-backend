@@ -1,0 +1,30 @@
+services:
+  backend:
+    image: dipro-smart-gardening/backend
+    build: ./
+    depends_on:
+      - influx
+      - graphdb
+    ports:
+      - "80:3000"
+    environment:
+      - INFLUX_URL=http://influx:8086
+      - INFLUX_TOKEN=5pt-HAz4zBjgCGI1iWyf23weMbSyzuxgn1naP08Pc7MaFNapRKRLi6EDk9U9hluAZ2GLTWgq-_900XLeuAg9oA==
+      - INFLUX_ORG=dipro
+      - INFLUX_BUCKET=dipro-test
+      - GRAPH_URL=http://graphdb:7200
+      - GRAPH_REPO=dipro
+
+  influx:
+    image: influxdb:latest
+    volumes:
+      - ./data/influxdb2:/var/lib/influxdb2:rw
+    # ports:
+    #   - "8086:8086"
+
+  graphdb:
+    image: ontotext/graphdb:10.0.2
+    volumes:
+      - ./data/graphdb:/opt/graphdb/home:rw
+    # ports:
+    #   - "7200:7200"

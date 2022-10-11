@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "tsc && node src/server.js"
+    "dev": "tsc && node src/server.js",
+    "build": "tsc",
+    "serve": "node src/server.js"
   },
   "dependencies": {
     "graphdb": "^2.0.2"

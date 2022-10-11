@@ -131,3 +131,6 @@ dist
 
 # typescript
 *.js
+
+# app databases
+data/

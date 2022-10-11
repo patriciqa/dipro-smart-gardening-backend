@@ -1,0 +1,11 @@
+# Node files
+**/node_modules
+npm-debug.log
+**/*.js
+
+# Docker files
+docker-compose.yml
+Dockerfile
+
+# App databases
+data

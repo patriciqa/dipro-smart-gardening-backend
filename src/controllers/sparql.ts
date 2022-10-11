@@ -8,8 +8,13 @@ const { RepositoryClientConfig, RDFRepositoryClient } =
 const { GetQueryPayload } = require("graphdb").query;
 import { plantQuery, floorQuery, floorsQuery } from "./queries";
 
-const config = new RepositoryClientConfig("http://localhost:7200/")
-  .setEndpoints(["http://localhost:7200/repositories/Surstoffi"])
+const graphUrl = process.env.GRAPH_URL ?? "http://localhost:7200";
+const repositoryName = process.env.GRAPH_REPO ?? "Surstoffi";
+
+const repoUrl = `${graphUrl}/repositories/${repositoryName}`;
+
+const config = new RepositoryClientConfig(graphUrl)
+  .setEndpoints([repoUrl])
   .setHeaders({
     Accept: RDFMimeType.SPARQL_RESULTS_JSON,
   })
