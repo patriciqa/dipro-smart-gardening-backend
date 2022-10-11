@@ -42,6 +42,7 @@ select * where {
     ?plant plants:substrate ?substrate.
     ?plant plants:waterNeed ?waterNeed.
     ?plant plants:plantDate ?plantDate.
+    ?plant plants:plantImage ?plantImage.
     ?plant plants:lastService ?lastService.
     ?plant plants:nextService ?nextService. 
     }

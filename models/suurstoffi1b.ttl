@@ -116,7 +116,8 @@ sstoffi:plant401_01 a plants:Plant;
     plants:substrate "Erde";
     plants:waterNeed 3;
     plants:lastService "2022-09-30";
-    plants:nextService "2023-03-30".
+    plants:nextService "2023-03-30";
+    plants:plantImage '/plantImages/Boston Farn.jpg'.
 
 sstoffi:soilMoistureEquipment01 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture01;
@@ -137,8 +138,8 @@ sstoffi:plant401_02 a plants:Plant;
     plants:substrate "Erde";
     plants:waterNeed 2;
     plants:lastService "2022-09-30";
-    plants:nextService "2023-06-30".
-
+    plants:nextService "2023-06-30";
+plants:plantImage '/plantImages/Mexikanische Bergpalme.jpg'.
 sstoffi:soilMoistureEquipment02 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture02;
     brick:hasLocation sstoffi:openOffice_401.
@@ -158,7 +159,8 @@ sstoffi:plant401_03 a plants:Plant;
     plants:substrate "Erde";
     plants:waterNeed 2;
     plants:lastService "2022-09-30";
-    plants:nextService "2023-09-30".
+    plants:nextService "2023-09-30";
+    plants:plantImage '/plantImages/Dieffenbachia gemischt.jpg'.
 
 sstoffi:soilMoistureEquipment03 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture03;
