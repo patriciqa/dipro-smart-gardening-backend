@@ -7,7 +7,7 @@ import plantsRouter from "./routes/plants";
 const cors = require('cors');
 
 let corsOptions = {
-  origin: ['http://localhost:3001']
+  origin: ['http://localhost:3000']
 }
 
 app.use(cors(corsOptions));
