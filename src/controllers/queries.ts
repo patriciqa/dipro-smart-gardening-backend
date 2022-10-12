@@ -1,10 +1,11 @@
-export const floorsQuery = ` PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
+export const floorsQuery = `PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX brick: <https://brickschema.org/schema/Brick#>
 select * where { 
   ?floorId a brick:Floor.
   ?floorId rdfs:label ?floorLabel.
-} 
+  ?floorId rdfs:floorNumber ?floorNumber.
+}
 `;
 
 export const floorQuery = `PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>

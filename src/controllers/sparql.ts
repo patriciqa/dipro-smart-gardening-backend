@@ -22,15 +22,6 @@ const config = new RepositoryClientConfig(graphUrl)
   .setWriteTimeout(30000);
 const repository = new RDFRepositoryClient(config);
 
-const query = ` PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX brick: <https://brickschema.org/schema/Brick#>
-select * where { 
-  ?floor a brick:Floor.
-    ?floor rdfs:label ?floorLabel.
-} 
-`;
-
 export async function getFloors() {
   const payload = (
     new GetQueryPayload().setQuery(floorsQuery) as unknown as GetQueryPayload
@@ -42,7 +33,9 @@ export async function getFloors() {
   const stream = await q;
   const result = await readString(stream);
   const entries = simplifyJson(result);
-  return entries;
+  return entries.map((e) => {
+    return { ...e, floorId: getId(e.floorId) };
+  });
 }
 
 export async function getFloor(floorId: string) {
@@ -63,6 +56,9 @@ export async function getFloor(floorId: string) {
   if (entries.length > 0) {
     const floorLabel = entries[0].floorLabel;
     entries.forEach((e) => delete e.floorLabel);
+    entries.forEach((e) => {
+      e.room = getId(e.room);
+    });
     const floor = { floorLabel, rooms: entries };
     return floor;
   }
@@ -94,8 +90,20 @@ export async function getRoom(roomId: string) {
     if ("plant" in entries[0]) {
       plants = entries;
     }
+    plants.forEach((e) => {
+      e.plant = getId(e.plant);
+    });
     const room = { roomLabel, plants };
     return room;
+  }
+  return null;
+}
+
+function getId(url: string) {
+  const regex = new RegExp("[^#]+$");
+  const match = regex.exec(url);
+  if (match !== null) {
+    return match[0];
   }
   return null;
 }

@@ -24,22 +24,32 @@ sstoffi:building1b a brick:Building;
 # Floors
 ##################################
 sstoffi:floor0 a brick:Floor;
-    rdfs:label "Ground Floor".
+    rdfs:label "Ground Floor";
+    rdfs:floorNumber 'EG'.
 
 sstoffi:floor1 a brick:Floor;
-    rdfs:label "First Floor".
+    rdfs:label "First Floor";
+    rdfs:floorNumber '1'.
+
 
 sstoffi:floor2 a brick:Floor;
-    rdfs:label "Second Floor".
+    rdfs:label "Second Floor";
+    rdfs:floorNumber '2'.
+
 
 sstoffi:floor3 a brick:Floor;
-    rdfs:label "Third Floor".
+    rdfs:label "Third Floor";
+    rdfs:floorNumber '3'.
+
 
 sstoffi:floor4 a brick:Floor;
-    rdfs:label "Fourth Floor".
+    rdfs:label "Fourth Floor";
+    rdfs:floorNumber'4'.
+
 
 sstoffi:floor5 a brick:Floor;
-    rdfs:label "Fifth Floor".
+    rdfs:label "Fifth Floor";
+    rdfs:ifloorNumberd '5'.
 
 
 
@@ -124,7 +134,7 @@ sstoffi:soilMoistureEquipment01 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:soilMoisture01 a plants:SoilMoistureSensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId05"; #TODO
+    brick:storedAt "http://restapi/of/timeseries/pointId05";    #TODO
     brick:measures sstoffi:plant401_01.
 
 sstoffi:plant401_02 a plants:Plant;
@@ -145,7 +155,7 @@ sstoffi:soilMoistureEquipment02 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:soilMoisture02 a plants:SoilMoistureSensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId06"; #TODO
+    brick:storedAt "http://restapi/of/timeseries/pointId06";          #TODO
     brick:measures sstoffi:plant401_02.
 
 sstoffi:plant401_03 a plants:Plant;
@@ -167,5 +177,5 @@ sstoffi:soilMoistureEquipment03 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:soilMoisture03 a plants:SoilMoistureSensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId07"; #TODO
+    brick:storedAt "http://restapi/of/timeseries/pointId07";               #TODO
     brick:measures sstoffi:plant401_03.
