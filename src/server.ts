@@ -2,7 +2,7 @@ import express from "express";
 
 const app = express();
 const port = 3000; // default port to listen
-import plantsRouter from "./routes/plants";
+import plantsRouter from "./routes/buildingRoutes";
 
 const cors = require('cors');
 

@@ -6,7 +6,7 @@ const { RepositoryClientConfig, RDFRepositoryClient } =
   require("graphdb").repository;
 // @ts-ignore
 const { GetQueryPayload } = require("graphdb").query;
-import { plantQuery, floorQuery, floorsQuery } from "./queries";
+import { roomQuery, floorQuery, floorsQuery, plantQuery } from "./queries";
 
 const graphUrl = process.env.GRAPH_URL ?? "http://localhost:7200";
 const repositoryName = process.env.GRAPH_REPO ?? "Surstoffi";
@@ -57,7 +57,7 @@ export async function getFloor(floorId: string) {
     const floorLabel = entries[0].floorLabel;
     entries.forEach((e) => delete e.floorLabel);
     entries.forEach((e) => {
-      e.room = getId(e.room);
+      e.roomId = getId(e.roomId);
     });
     const floor = { floorLabel, rooms: entries };
     return floor;
@@ -67,7 +67,7 @@ export async function getFloor(floorId: string) {
 
 export async function getRoom(roomId: string) {
   const payload = (
-    new GetQueryPayload().setQuery(plantQuery) as unknown as GetQueryPayload
+    new GetQueryPayload().setQuery(roomQuery) as unknown as GetQueryPayload
   )
     .setQueryType(QueryType.SELECT)
     .addBinding(
@@ -83,20 +83,46 @@ export async function getRoom(roomId: string) {
   if (entries.length > 0) {
     let plants = [];
     const roomLabel = entries[0].roomLabel;
+    const floorLabel = entries[0].floorLabel;
     entries.forEach((e) => {
       delete e.room;
       delete e.roomLabel;
+      delete e.floor;
+      delete e.floorLabel;
     });
-    if ("plant" in entries[0]) {
+
+    if ("plantId" in entries[0]) {
       plants = entries;
     }
     plants.forEach((e) => {
-      e.plant = getId(e.plant);
+      e.plantId = getId(e.plantId);
     });
-    const room = { roomLabel, plants };
+    const room = { roomLabel, floorLabel, plants };
     return room;
   }
-  return null;
+}
+
+export async function getPlant(plantId: string) {
+  const payload = (
+    new GetQueryPayload().setQuery(plantQuery) as unknown as GetQueryPayload
+  )
+    .setQueryType(QueryType.SELECT)
+    .addBinding(
+      "$plant",
+      `<https://brickbuilding.hslu.ch/buildings/suurstoffi1b#${plantId}>`
+    )
+    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
+
+  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
+  const stream = await q;
+  const result = await readString(stream);
+  const entries = simplifyJson(result);
+  entries.forEach((e) => {
+    delete e.floor;
+    delete e.room;
+    delete e.plant;
+  });
+  return entries[0];
 }
 
 function getId(url: string) {
