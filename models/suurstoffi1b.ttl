@@ -44,12 +44,11 @@ sstoffi:floor3 a brick:Floor;
 
 sstoffi:floor4 a brick:Floor;
     rdfs:label "Fourth Floor";
-    rdfs:floorNumber'4'.
+    rdfs:floorNumber '4'.
 
 sstoffi:floor5 a brick:Floor;
     rdfs:label "Fifth Floor";
-    rdfs:floorNumber'5'.
-
+    rdfs:floorNumber '5'.
 
 # Rooms
 #################################

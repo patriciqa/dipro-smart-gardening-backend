@@ -7,6 +7,7 @@ services:
       - graphdb
     ports:
       - "80:3000"
+      - "443:443"
     environment:
       - INFLUX_URL=http://influx:8086
       - INFLUX_TOKEN=5pt-HAz4zBjgCGI1iWyf23weMbSyzuxgn1naP08Pc7MaFNapRKRLi6EDk9U9hluAZ2GLTWgq-_900XLeuAg9oA==
@@ -14,6 +15,9 @@ services:
       - INFLUX_BUCKET=dipro-test
       - GRAPH_URL=http://graphdb:7200
       - GRAPH_REPO=dipro
+    volumes:
+      - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/fullchain1.pem:/app/cert/fullchain.pem:ro
+      - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/privkey1.pem:/app/cert/privkey.pem:ro
 
   influx:
     image: influxdb:latest
