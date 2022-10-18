@@ -7,6 +7,7 @@ const { RepositoryClientConfig, RDFRepositoryClient } =
 // @ts-ignore
 const { GetQueryPayload } = require("graphdb").query;
 import { roomQuery, floorQuery, floorsQuery, plantQuery } from "./queries";
+import { getData } from "./sensors";
 
 const graphUrl = process.env.GRAPH_URL ?? "http://localhost:7200";
 const repositoryName = process.env.GRAPH_REPO ?? "Surstoffi";
@@ -84,11 +85,22 @@ export async function getRoom(roomId: string) {
     let plants = [];
     const roomLabel = entries[0].roomLabel;
     const floorLabel = entries[0].floorLabel;
+    const airTempLabel = entries[0].airTempLabel;
+    const airHumidityLabel = entries[0].airHumidityLabel;
+    const airQualityLabel = entries[0].airQualityLabel;
     entries.forEach((e) => {
       delete e.room;
       delete e.roomLabel;
       delete e.floor;
       delete e.floorLabel;
+      delete e.airEquipment;
+      delete e.airTemp;
+      delete e.airTempLabel;
+      delete e.airHumidity;
+      delete e.airHumidityLabel;
+      delete e.airQualityEquipment;
+      delete e.airQuality;
+      delete e.airQualityLabel;
     });
 
     if ("plantId" in entries[0]) {
@@ -97,7 +109,19 @@ export async function getRoom(roomId: string) {
     plants.forEach((e) => {
       e.plantId = getId(e.plantId);
     });
-    const room = { roomLabel, floorLabel, plants };
+
+    const airHumidity = await getData(airHumidityLabel);
+    const airQuality = await getData(airQualityLabel);
+    const airTemp = await getData(airTempLabel);
+
+    const room = {
+      roomLabel,
+      floorLabel,
+      airTemp,
+      airHumidity,
+      airQuality,
+      plants,
+    };
     return room;
   }
 }
@@ -117,12 +141,16 @@ export async function getPlant(plantId: string) {
   const stream = await q;
   const result = await readString(stream);
   const entries = simplifyJson(result);
-  entries.forEach((e) => {
+  const e = entries[0];
+  if (e !== undefined) {
     delete e.floor;
     delete e.room;
     delete e.plant;
-  });
-  return entries[0];
+    delete e.soilMoistureEquipment;
+    e.soilMoisture = await getData(e.moistureLabel);
+    delete e.moistureLabel;
+  }
+  return e;
 }
 
 function getId(url: string) {

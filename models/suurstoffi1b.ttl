@@ -90,24 +90,24 @@ sstoffi:airEquipment01 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:airTemp01 a brick:Zone_Air_Temperature_Sensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId01". #TODO
+    rdfs:label "airTemp01".
 
 sstoffi:airHumidity01 a brick:Zone_Air_Humidity_Sensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId02". #TODO
+    rdfs:label "airHumidity01".
 
 sstoffi:airQualityEquipment01 a brick:Equipment;
     brick:hasPoint sstoffi:airQuality01;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:airQuality01 a brick:CO2_Sensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId03". #TODO
+    rdfs:label "airQuality01".
 
 sstoffi:luminanceEquipment01 a brick:Equipment;
     brick:hasPoint sstoffi:luminance01;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:luminance01 a brick:Luminance_Sensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId04". #TODO
+    rdfs:label "luminance01".
 
 
 # Plants
@@ -131,8 +131,8 @@ sstoffi:soilMoistureEquipment01 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:soilMoisture01 a plants:SoilMoistureSensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId05";    #TODO
-    brick:measures sstoffi:plant401_01.
+    brick:measures sstoffi:plant401_01;
+    rdfs:label "soilMoisture01".
 
 sstoffi:plant401_02 a plants:Plant;
     plants:id "plant401_02";
@@ -152,8 +152,8 @@ sstoffi:soilMoistureEquipment02 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:soilMoisture02 a plants:SoilMoistureSensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId06";          #TODO
-    brick:measures sstoffi:plant401_02.
+    brick:measures sstoffi:plant401_02;
+    rdfs:label "soilMoisture02".
 
 sstoffi:plant401_03 a plants:Plant;
     plants:id "plant401_03";
@@ -174,5 +174,5 @@ sstoffi:soilMoistureEquipment03 a brick:Equipment;
     brick:hasLocation sstoffi:openOffice_401.
 
 sstoffi:soilMoisture03 a plants:SoilMoistureSensor;
-    brick:storedAt "http://restapi/of/timeseries/pointId07";               #TODO
-    brick:measures sstoffi:plant401_03.
+    brick:measures sstoffi:plant401_03;
+    rdfs:label "soilMoisture03".

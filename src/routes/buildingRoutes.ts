@@ -1,9 +1,15 @@
 import express, { Request, Response } from "express";
-import { getRoom, getFloors, getFloor, getPlant } from "../controllers/building";
+import {
+  getRoom,
+  getFloors,
+  getFloor,
+  getPlant,
+} from "../controllers/building";
+import { writeSensorId } from "../controllers/sensors";
 import path from "path";
 const router = express.Router();
 
-
+router.use(express.json());
 
 router.get("/floors", async (req: Request, res: Response) => {
   try {
@@ -41,6 +47,17 @@ router.get("/plants/:plantId", async (req: Request, res: Response) => {
     res.status(200).json(entries);
   } catch (err) {
     console.error("Could not load data from graphDB", err);
+    res.status(500).send();
+  }
+});
+
+router.post("/sensors", async (req: Request, res: Response) => {
+  try {
+    writeSensorId(req.body.sensor_id, parseFloat(req.body.value));
+    res.status(200).send();
+  } catch (err) {
+    console.error("Could not write into influxDB", err);
+
     res.status(500).send();
   }
 });

@@ -40,6 +40,22 @@ select * where {
     ?plantId brick:hasLocation ?room.
     ?plantId a plants:Plant . 
     ?plantId plants:species ?plantSpecies.
+    ?airEquipment a brick:Equipment.
+    ?airEquipment brick:hasLocation ?room.
+ 
+    ?airTemp a brick:Zone_Air_Temperature_Sensor.
+    ?airTemp rdfs:label ?airTempLabel.
+    ?airEquipment brick:hasPoint ?airTemp.
+        
+    ?airHumidity a brick:Zone_Air_Humidity_Sensor.
+    ?airHumidity rdfs:label ?airHumidityLabel.
+    ?airEquipment brick:hasPoint ?airHumidity.
+    
+    ?airQualityEquipment a brick:Equipment.
+    ?airQualityEquipment brick:hasLocation ?room.
+    ?airQuality a brick:CO2_Sensor.
+    ?airQuality rdfs:label ?airQualityLabel.
+    ?airQualityEquipment brick:hasPoint ?airQuality. 
     }
 } 
 `;
@@ -52,6 +68,12 @@ PREFIX plants: <http://digitialideation.hslu.ch/dipro/plants#>
 
 select * where {
     ?plant a plants:Plant .
+    ?plant plants:id ?plantId.
+    ?soilMoistureEquipment brick:hasLocation ?room.
+    ?soilMoisture a plants:SoilMoistureSensor.
+    ?soilMoisture rdfs:label ?moistureLabel.
+    ?soilMoistureEquipment brick:hasPoint ?soilMoisture. 
+    ?soilMoisture brick:measures ?plant.
     ?plant brick:hasLocation ?room.
     ?room rdfs:label ?roomLabel.
     ?room brick:isPartOf ?floor.

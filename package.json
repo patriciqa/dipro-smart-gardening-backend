@@ -5,6 +5,7 @@
     "serve": "node src/server.js"
   },
   "dependencies": {
+    "@influxdata/influxdb-client": "^1.31.0",
     "cors": "^2.8.5",
     "graphdb": "^2.0.2"
   },
