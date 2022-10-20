@@ -6,7 +6,13 @@ const { RepositoryClientConfig, RDFRepositoryClient } =
   require("graphdb").repository;
 // @ts-ignore
 const { GetQueryPayload } = require("graphdb").query;
-import { roomQuery, floorQuery, floorsQuery, plantQuery } from "./queries";
+import {
+  roomQuery,
+  floorQuery,
+  floorsQuery,
+  plantQuery,
+  notificationQuery,
+} from "./queries";
 import { getData } from "./sensors";
 
 const graphUrl = process.env.GRAPH_URL ?? "http://localhost:7200";
@@ -151,6 +157,22 @@ export async function getPlant(plantId: string) {
     delete e.moistureLabel;
   }
   return e;
+}
+export async function getNotifications(sensorLabel: string) {
+  const payload = (
+    new GetQueryPayload().setQuery(
+      notificationQuery
+    ) as unknown as GetQueryPayload
+  )
+    .setQueryType(QueryType.SELECT)
+    .addBinding("$sensorLabel", `"${sensorLabel}"`)
+    .setResponseType(RDFMimeType.SPARQL_RESULTS_JSON);
+
+  const q: Promise<NodeJS.ReadStream> = repository.query(payload);
+  const stream = await q;
+  const result = await readString(stream);
+  const entries = simplifyJson(result);
+  return entries[0];
 }
 
 function getId(url: string) {

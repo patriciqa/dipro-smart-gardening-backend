@@ -4,7 +4,7 @@ import {
   ParameterizedQuery,
   Point,
 } from "@influxdata/influxdb-client";
-
+import { writeNotification, deleteNotification } from "./notifications";
 const url = process.env.INFLUX_URL ?? "http://localhost:8086";
 const token =
   process.env.INFLUX_TOKEN ??
@@ -60,13 +60,19 @@ const influxDB = new InfluxDB({ url, token });
  * Provide your `org` and `bucket`.
  **/
 
-export function writeSensorId(id: string, value: number) {
+export function writeSensorId(sensorLabel: string, value: number) {
   const writeApi = influxDB.getWriteApi(org, bucket);
   const sensorId = new Point("sensors")
-    .tag("sensor_id", id)
+    .tag("sensor_id", sensorLabel)
     .floatField("value", value);
   writeApi.writePoint(sensorId);
   writeApi.close().then(() => {
     console.log("WRITE FINISHED");
   });
+
+  if (value <= 300) {
+    writeNotification(sensorLabel);
+  } else {
+    deleteNotification(sensorLabel);
+  }
 }

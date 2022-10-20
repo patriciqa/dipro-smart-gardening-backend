@@ -89,3 +89,22 @@ select * where {
     ?plant plants:nextService ?nextService. 
 } 
 `;
+
+export const notificationQuery = `
+PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX brick: <https://brickschema.org/schema/Brick#>
+PREFIX plants: <http://digitialideation.hslu.ch/dipro/plants#>
+select ?floorLabel ?roomLabel ?plantSpecies ?sensorLabel where { 
+  ?floor a brick:Floor.
+  ?floor rdfs:label ?floorLabel.
+   ?room a brick:Room.
+   ?room rdfs:label ?roomLabel.
+   ?room brick:isPartOf ?floor.
+   ?plant brick:hasLocation ?room.
+   ?plant a plants:Plant.     
+   ?plant plants:species ?plantSpecies.
+    ?soilMoisture a plants:SoilMoistureSensor.
+    ?soilMoisture brick:measures ?plant.
+    ?soilMoisture rdfs:label ?sensorLabel.
+}`;

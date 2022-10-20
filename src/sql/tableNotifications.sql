@@ -1,0 +1,2 @@
+USE DIPRO
+CREATE TABLE notifications (sensorid VARCHAR(255),plant VARCHAR(255), type VARCHAR(255), date DATETIME, floor VARCHAR(255), room VARCHAR(255));

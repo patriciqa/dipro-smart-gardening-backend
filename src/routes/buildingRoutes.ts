@@ -7,6 +7,7 @@ import {
 } from "../controllers/building";
 import { writeSensorId } from "../controllers/sensors";
 import path from "path";
+import { readNotifications } from "../controllers/notifications";
 const router = express.Router();
 
 router.use(express.json());
@@ -61,6 +62,17 @@ router.post("/sensors", async (req: Request, res: Response) => {
     res.status(500).send();
   }
 });
+
+router.get("/notifications", async (req: Request, res: Response) => {
+  try {
+    const entries = await readNotifications();
+    res.status(200).json(entries);
+  } catch (err) {
+    console.error("Could not load data from graphDB", err);
+    res.status(500).send();
+  }
+});
+
 
 const plantImages = path.join(__dirname, "..", "images");
 router.use("/plantImages", express.static(plantImages));

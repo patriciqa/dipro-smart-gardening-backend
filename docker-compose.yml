@@ -5,6 +5,7 @@ services:
     depends_on:
       - influx
       - graphdb
+      - mysql
     ports:
       - "80:3000"
       - "443:443"
@@ -15,9 +16,10 @@ services:
       - INFLUX_BUCKET=dipro-test
       - GRAPH_URL=http://graphdb:7200
       - GRAPH_REPO=dipro
-    volumes:
-      - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/fullchain1.pem:/app/cert/fullchain.pem:ro
-      - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/privkey1.pem:/app/cert/privkey.pem:ro
+      - MYSQL_HOST=mysql
+    # volumes:
+    #   - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/fullchain1.pem:/app/cert/fullchain.pem:ro
+    #   - /etc/letsencrypt/archive/dipro-h22-dburger.enterpriselab.ch/privkey1.pem:/app/cert/privkey.pem:ro
 
   influx:
     image: influxdb:latest
@@ -32,3 +34,14 @@ services:
       - ./data/graphdb:/opt/graphdb/home:rw
     # ports:
     #   - "7200:7200"
+  mysql:
+    image: mysql:latest
+    volumes: 
+      - ./data/mysql:/var/lib/mysql
+      - ./src/sql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=DIPRO
+      - MYSQL_USER=dipro
+      - MYSQL_PASSWORD=dipro
+
