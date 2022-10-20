@@ -1,5 +1,5 @@
 import mysql from "mysql2";
-import { getNotifications } from "./building";
+import { getId, getNotifications } from "./building";
 
 let connection: mysql.Connection;
 function createConnection() {
@@ -24,19 +24,23 @@ export function writeNotification(sensorLabel: string) {
       return;
     }
     var sql =
-      "INSERT INTO notifications (sensorid, plant, type, date, floor, room) VALUES (?,?,?,?,?,?)";
+      "INSERT INTO notifications (sensorid, plant, plantId, type, date, floor, room, roomId, plantImage) VALUES (?,?,?,?,?,?,?,?,?)";
     const notificationInfo = await getNotifications(sensorLabel);
 
     console.log(notificationInfo);
+
     if (notificationInfo !== undefined) {
       const date = new Date();
       var values = [
         sensorLabel,
         notificationInfo.plantSpecies,
+        notificationInfo.plantId,
         "Water",
         date,
         notificationInfo.floorLabel,
         notificationInfo.roomLabel,
+        getId(notificationInfo.room),
+        notificationInfo.plantImage,
       ];
       createConnection().query(sql, values, function (err, result) {
         if (err) throw err;

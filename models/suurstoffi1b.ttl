@@ -146,8 +146,8 @@ sstoffi:plant401_02 a plants:Plant;
     plants:waterNeed 2;
     plants:lastService "2022-09-30";
     plants:nextService "2023-06-30";
-plants:plantImage '/plantImages/Mexikanische Bergpalme.jpg'.
-sstoffi:soilMoistureEquipment02 a brick:Equipment;
+    plants:plantImage '/plantImages/Mexikanische Bergpalme.jpg'.
+    sstoffi:soilMoistureEquipment02 a brick:Equipment;
     brick:hasPoint sstoffi:soilMoisture02;
     brick:hasLocation sstoffi:openOffice_401.
 

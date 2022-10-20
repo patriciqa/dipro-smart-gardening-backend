@@ -175,7 +175,7 @@ export async function getNotifications(sensorLabel: string) {
   return entries[0];
 }
 
-function getId(url: string) {
+export function getId(url: string) {
   const regex = new RegExp("[^#]+$");
   const match = regex.exec(url);
   if (match !== null) {

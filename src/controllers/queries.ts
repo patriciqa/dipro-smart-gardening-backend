@@ -90,12 +90,11 @@ select * where {
 } 
 `;
 
-export const notificationQuery = `
-PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
+export const notificationQuery = `PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX brick: <https://brickschema.org/schema/Brick#>
 PREFIX plants: <http://digitialideation.hslu.ch/dipro/plants#>
-select ?floorLabel ?roomLabel ?plantSpecies ?sensorLabel where { 
+select ?floorLabel ?room ?roomLabel ?plantSpecies ?sensorLabel ?plantId ?plantImage where { 
   ?floor a brick:Floor.
   ?floor rdfs:label ?floorLabel.
    ?room a brick:Room.
@@ -104,6 +103,8 @@ select ?floorLabel ?roomLabel ?plantSpecies ?sensorLabel where {
    ?plant brick:hasLocation ?room.
    ?plant a plants:Plant.     
    ?plant plants:species ?plantSpecies.
+   ?plant plants:id ?plantId.
+   ?plant plants:plantImage ?plantImage.
     ?soilMoisture a plants:SoilMoistureSensor.
     ?soilMoisture brick:measures ?plant.
     ?soilMoisture rdfs:label ?sensorLabel.
