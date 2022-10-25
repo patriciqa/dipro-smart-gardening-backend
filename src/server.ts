@@ -9,8 +9,8 @@ const app = express();
 const port = 3000; // default port to listen
 
 let corsOptions = {
-  origin: ['http://localhost:3000']
-}
+  origin: ["http://localhost:3000", "https://dipro-smart-building.netlify.app"],
+};
 
 app.use(cors(corsOptions));
 
@@ -32,7 +32,9 @@ if (fs.existsSync(certPath) && fs.existsSync(keyPath)) {
 
   // Redirect all HTTP -> HTTPS
   const httpRedirect = express();
-  httpRedirect.use((request, response) => response.redirect("https://" + request.headers.host + request.url));
+  httpRedirect.use((request, response) =>
+    response.redirect("https://" + request.headers.host + request.url)
+  );
   httpRedirect.listen(port);
 } else {
   app.listen(port, () => {
