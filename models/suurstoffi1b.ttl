@@ -25,29 +25,29 @@ sstoffi:building1b a brick:Building;
 ##################################
 sstoffi:floor0 a brick:Floor;
     rdfs:label "Ground Floor";
-    rdfs:floorNumber 'EG'.
+    rdfs:floorNumber 'Erdgeschoss'.
 
 sstoffi:floor1 a brick:Floor;
-    rdfs:label "First Floor";
+    rdfs:label "1. Stock";
     rdfs:floorNumber '1'.
 
 
 sstoffi:floor2 a brick:Floor;
-    rdfs:label "Second Floor";
+    rdfs:label "2. Stock";
     rdfs:floorNumber '2'.
 
 
 sstoffi:floor3 a brick:Floor;
-    rdfs:label "Third Floor";
+    rdfs:label "3. Stock";
     rdfs:floorNumber '3'.
 
 
 sstoffi:floor4 a brick:Floor;
-    rdfs:label "Fourth Floor";
+    rdfs:label "4. Stock";
     rdfs:floorNumber '4'.
 
 sstoffi:floor5 a brick:Floor;
-    rdfs:label "Fifth Floor";
+    rdfs:label "5. Stock";
     rdfs:floorNumber '5'.
 
 # Rooms
