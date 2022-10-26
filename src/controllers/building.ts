@@ -66,7 +66,22 @@ export async function getFloor(floorId: string) {
     entries.forEach((e) => {
       e.roomId = getId(e.roomId);
     });
-    const floor = { floorLabel, rooms: entries };
+    const rooms: any = {};
+    entries.forEach((e) => {
+      if (!rooms[e.roomId]) {
+        rooms[e.roomId] = {
+          roomId: e.roomId,
+          roomLabel: e.roomLabel,
+          plantImages: e.plantImage ? [e.plantImage] : [],
+          plantCount: parseInt(e.plantCount),
+        };
+      } else {
+        rooms[e.roomId].plantImages.push(e.plantImage);
+        rooms[e.roomId].plantCount++;
+      }
+    });
+
+    const floor = { floorLabel, rooms: Object.values(rooms) };
     return floor;
   }
   return null;
@@ -150,6 +165,7 @@ export async function getPlant(plantId: string) {
   const e = entries[0];
   if (e !== undefined) {
     delete e.floor;
+    e.roomId = getId(e.room);
     delete e.room;
     delete e.plant;
     delete e.soilMoistureEquipment;
