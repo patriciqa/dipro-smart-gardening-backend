@@ -73,7 +73,6 @@ router.get("/notifications", async (req: Request, res: Response) => {
   }
 });
 
-
 const plantImages = path.join(__dirname, "..", "images");
 router.use("/plantImages", express.static(plantImages));
 

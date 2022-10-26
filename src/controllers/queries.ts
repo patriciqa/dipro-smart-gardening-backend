@@ -13,7 +13,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX brick: <https://brickschema.org/schema/Brick#>
 PREFIX sstoffi: <https://brickbuilding.hslu.ch/buildings/suurstoffi1b#>
 PREFIX plants: <http://digitialideation.hslu.ch/dipro/plants#>
-select ?floorLabel ?roomId ?roomLabel (count(distinct ?plant) as ?plantCount) where {
+select ?floorLabel ?roomId ?roomLabel ?plantImage (count(distinct ?plant) as ?plantCount) where {
   ?floor a brick:Floor.
     ?floor rdfs:label ?floorLabel.
     ?roomId brick:isPartOf ?floor.
@@ -21,8 +21,9 @@ select ?floorLabel ?roomId ?roomLabel (count(distinct ?plant) as ?plantCount) wh
    optional {
     ?plant brick:hasLocation ?roomId.
     ?plant a plants:Plant.
+    ?plant plants:plantImage ?plantImage.
    }
-} GROUP BY ?floor ?floorLabel ?roomId ?roomLabel 
+} GROUP BY ?floor ?floorLabel ?roomId ?roomLabel ?plantImage
 `;
 
 export const roomQuery = `PREFIX btzf: <http://bt.schema.siemens.io/shared/btzf#>
