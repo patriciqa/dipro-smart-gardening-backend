@@ -40,6 +40,7 @@ select * where {
     optional {
     ?plantId brick:hasLocation ?room.
     ?plantId a plants:Plant . 
+    ?plantId plants:plantImage ?plantImage.
     ?plantId plants:species ?plantSpecies.
     ?airEquipment a brick:Equipment.
     ?airEquipment brick:hasLocation ?room.
