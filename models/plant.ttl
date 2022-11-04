@@ -40,6 +40,12 @@ plants:isSensorEquipmentOf rdf:type owl:ObjectProperty;
 plants:SoilMoistureSensor rdf:type owl:Class ;
     rdfs:subClassOf brick:Sensor.
 
+plants:idealTemp rdf:type owl:DatatypeProperty ;
+                 rdfs:domain plants:Plant ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "idealTemp" ;
+                 rdfs:label "idealTemp" .
+
 plants:potSize rdf:type owl:DatatypeProperty ;
                  rdfs:domain plants:Plant ;
                  rdfs:range xsd:string ;
