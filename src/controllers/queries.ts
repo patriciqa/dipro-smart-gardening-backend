@@ -81,6 +81,7 @@ select * where {
     ?room brick:isPartOf ?floor.
     ?floor rdfs:label ?floorLabel.
     ?plant plants:species ?plantSpecies.
+    ?plant plants:idealTemp ?idealTemp.
     ?plant plants:potSize ?potSize.
     ?plant plants:lightNeed ?lightNeed.
     ?plant plants:substrate ?substrate.
